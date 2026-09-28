@@ -69,11 +69,19 @@ async function buscarPokemon(e) {
     e.preventDefault();
 
     let nombrePokemon = document.getElementById('pokemonInput').value;
-    nombrePokemon = nombrePokemon.trim().toLowerCase();
+    nombrePokemon = nombrePokemon.trim();
 
     if (nombrePokemon === '') {
         document.getElementById('resultado').innerHTML =
-            '<p class="mensaje-advertencia">Por favor escribe el nombre o número de un Pokémon.</p>';
+            '<p class="mensaje-advertencia">Por favor escribe el número de un Pokémon.</p>';
+        return;
+    }
+
+    const soloNumeros = /^[0-9]+$/;
+
+    if (!soloNumeros.test(nombrePokemon)) {
+        document.getElementById('resultado').innerHTML =
+            '<p class="mensaje-advertencia">Solo se permiten números. No uses letras ni caracteres especiales.</p>';
         return;
     }
 
